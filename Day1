@@ -1,0 +1,118 @@
+// 13. Roman to Integer
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    const myMap = {
+        'I' : 1,
+        'V' : 5,
+        'X' : 10,
+        'L' : 50,
+        'C' : 100,
+        'D' : 500,
+        'M' : 1000
+    }
+    let result = 0;
+    for(let i=0; i<s.length; i++){
+        const curr = myMap[s[i]]
+        const next = myMap[s[i+1]]
+
+        if(curr<next){
+            result += next - curr;
+            i++
+        } else {
+            result += curr
+        }
+    }
+    return result;
+};
+
+// -----------------------------------------------------------------------------------------------------------------
+
+// 14. Longest Common Prefix
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    let prefix = strs[0]
+    for (let i=1; i<strs.length; i++){
+        while(strs[i].indexOf(prefix) !==0){
+            prefix = prefix.substring(0, prefix.length-1)
+        }
+    }
+    return prefix
+};
+
+// -----------------------------------------------------------------------------------------------------------------
+
+// 20. Valid Parentheses
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    let stack = [];
+  
+    for (let i=0; i<s.length; i++){
+        let top= stack[stack.length - 1]
+        if(s[i]== '(' || s[i]== '{' || s[i]== '['){
+            stack.push(s[i])
+        }
+  
+      else if (s[i] == ')' && top == '(' || s[i] == '}' && top == '{' || s[i] == ']' && top == '['){
+            stack.pop()
+        }else return false
+    }
+    if (stack.length == 0){
+        return true
+    }
+    if (stack.length != 0){return false}
+  };
+
+  // -----------------------------------------------------------------------------------------------------------------
+
+//   28. Find the Index of the First Occurrence in a String
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+    let j=0, i=0, k=0
+    while(i<haystack.length){
+    while(needle[j]==haystack[k]){
+        k++
+        j++
+        if(j==needle.length) return i
+        if(k == haystack.length) return -1
+    }
+    if(needle[j] != haystack[k]){
+        i++
+        k=i
+        j=0
+    }
+}
+    return -1
+};
+
+// -----------------------------------------------------------------------------------------------------------------
+
+// 58. Length of Last Word
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+    if(s.length == 0) return 0;
+    let array = s.trim().split(' ');
+    return array[array.length-1].length;
+};
+
+// -----------------------------------------------------------------------------------------------------------------
